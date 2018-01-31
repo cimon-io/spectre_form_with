@@ -10,6 +10,12 @@ class SpectreFormWithTest < ActiveSupport::TestCase
     SpectreFormWith::FormBuilder.new(:user, User.new, TestHelper.new, {})
   }
 
+  describe '#form_icon' do
+    it 'returns a i element with class="form-icon"' do
+      f.form_icon.must_equal %Q{<i class="form-icon"></i>}
+    end
+  end
+
   describe '#text_field' do
     it 'returns a input element with type="text" and class="form-input"' do
       f.text_field(:about).must_equal %Q{<input class="form-input" type="text" name="user[about]" id="user_about" />}

@@ -8,10 +8,18 @@ A really simple form builder targeting the newest versions of Rails and Spectre.
 + Rails (~5.0)
 + Spectre.css (0.5.0)
 
-## Installation
+## Development
 
 ⚠️ **Not published** ⚠️  
 🚧 This project is under development, but is relatively stable for basic forms. 🚧
+
+This gem is currently under development and hasn't reached a stable version yet, however there are tests for every basic field input so far! The current test suite is written with MiniTest.
+
+Use `rake` to run tests.
+
+    $ rake
+
+## Installation
 
 Add this line to your application's Gemfile:
 
@@ -53,16 +61,7 @@ Will produce the following HTML:
     <label class="form-label" for="user_email">Email</label>
     <input class="form-input" type="email" name="user[email]">
   </div>
-  
+
   <input type="submit" name="commit" value="Sign up" class="btn btn-primary" data-disable-with="Sign up">
 </form>
 ```
-
-## Development
-
-This gem is currently under development and hasn't reached a stable version yet, however there are tests for every basic field input so far! The current test suite is written with MiniTest.
-
-Use `rake` to run tests.
-
-    $ rake
-

@@ -1,0 +1,11 @@
+<%= spectre_form_with model: @user, url: users_path do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.group :email do %>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    <%= f.errors :email %>
+  <% end %>
+
+  <%= f.submit 'Sign up', class: 'btn btn-primary' %>
+<% end %>

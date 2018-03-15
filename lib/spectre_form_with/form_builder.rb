@@ -9,7 +9,7 @@ module SpectreFormWith
       define_method(selector) do |name, **options|
         options ||= {}
         input_class = ['form-input']
-        input_class.push('is-error') if object.errors.has_key?(name)
+        input_class.push('is-error') if object && object.errors.has_key?(name)
 
         super(name, insert_class(input_class.join(' '), options))
       end
@@ -51,13 +51,13 @@ module SpectreFormWith
     end
 
     def error_notification(message = nil)
-      return unless object.errors.any?
+      return unless object && object.errors.any?
       message = message || 'Please review the problems below:'
       @template.content_tag(:div, message, class: 'toast toast-error')
     end
 
     def errors(name)
-      return unless object.errors.has_key?(name)
+      return unless object && object.errors.has_key?(name)
       errors ||= object.errors.full_messages_for(name).join(', ').remove(' ' + name.to_s.capitalize) + '.'
       @template.content_tag(:div, errors, class: 'form-input-hint')
     end

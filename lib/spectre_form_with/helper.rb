@@ -2,7 +2,8 @@ module SpectreFormWith
   module Helper
     def spectre_form_with(options = {}, &block)
       temporarily_disable_field_error_proc do
-        form_with(options.merge({ builder: SpectreFormWith::FormBuilder, id: dom_id(options[:model]) }), &block)
+        options.merge({ id: dom_id(options[:model]) }) unless options[:model].nil?
+        form_with(options.merge({ builder: SpectreFormWith::FormBuilder }), &block)
       end
     end
 

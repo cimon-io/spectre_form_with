@@ -4,7 +4,7 @@ module SpectreFormWith
       :text_field, :text_area, :email_field, :password_field, :telephone_field,
       :url_field, :week_field, :time_field, :search_field, :range_field, 
       :month_field, :number_field, :datetime_field, :datetime_local_field,
-      :color_field
+      :color_field, :file_field
     ].each do |selector|
       define_method(selector) do |name, **options|
         options ||= {}

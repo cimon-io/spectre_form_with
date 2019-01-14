@@ -46,6 +46,10 @@ module SpectreFormWith
       super(name, choices, options, insert_class('form-select', html_options), &block)
     end
 
+    def collection_select(object, method, collection, value_method, text_method, options = {}, html_options = {})
+      super(object, method, collection, value_method, text_method, options, insert_class('form-select', html_options))
+    end
+    
     def label(name, text = nil, options = {}, &block)
       super(name, text, insert_class('form-label', options), &block)
     end

@@ -19,17 +19,9 @@ module SpectreFormWith
       @template.content_tag(:i, '', class: 'form-icon')
     end
 
-    def radio_label(name, options = {}, &block)
-      super(name, insert_class('form-switch', options), &block)
-    end
-
     def radio_button(name, tag_value, options = {})
       super(name, tag_value, options)
       input + form_icon
-    end
-
-    def check_label(name, options = {}, &block)
-      super(name, insert_class('form-checkbox', options), &block)
     end
 
     def check_box(name, options = {}, checked_value = '1', unchecked_value = '0')
@@ -46,8 +38,17 @@ module SpectreFormWith
       super(method, collection, value_method, text_method, options, insert_class('form-select', html_options))
     end
     
+    alias default_label label
     def label(name, text = nil, options = {}, &block)
-      super(name, text, insert_class('form-label', options), &block)
+      default_label(name, text, insert_class('form-label', options), &block)
+    end
+    
+    def check_label(name, options = {}, &block)
+      default_label(name, insert_class('form-checkbox', options), &block)
+    end
+    
+    def radio_label(name, options = {}, &block)
+      default_label(name, insert_class('form-switch', options), &block)
     end
 
     def error_notification(message = nil)

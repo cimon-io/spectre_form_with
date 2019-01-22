@@ -20,9 +20,7 @@ module SpectreFormWith
     end
 
     def radio_label(options = {}, &block)
-      @template.content_tag(:label, options.merge(class: 'form-switch')) do
-        yield
-      end
+      super(name, text, insert_class('form-switch', options), &block)
     end
 
     def radio_button(name, tag_value, options = {})
@@ -31,9 +29,7 @@ module SpectreFormWith
     end
 
     def check_label(options = {}, &block)
-      @template.content_tag(:label, options.merge(class: 'form-checkbox')) do
-        yield
-      end
+      super(name, text, insert_class('form-checkbox', options), &block)
     end
 
     def check_box(name, options = {}, checked_value = '1', unchecked_value = '0')

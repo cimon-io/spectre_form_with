@@ -11,7 +11,7 @@ module SpectreFormWith
         input_class = ['form-input']
         input_class.push('is-error') if object && object.errors.has_key?(name)
 
-        super(name, insert_class(options, input_class))
+        super(name, insert_class(options, *input_class))
       end
     end
 

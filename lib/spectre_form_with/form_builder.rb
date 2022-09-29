@@ -80,7 +80,7 @@ module SpectreFormWith
     def insert_class(options, *class_names, **conditional_class_names)
       output = options.dup
       
-      output[:class] = ((output[:class] || '') + ' ' + (class_names + conditional_class_names.map { |k, v| v ? k : nil }.compact).map(&:to_s).uniq.join(' ')
+      output[:class] = ((output[:class] || '') + ' ' + (class_names + conditional_class_names.map { |k, v| v ? k : nil }.compact).map(&:to_s).uniq.join(' '))
       output
     end
   end

@@ -11,7 +11,7 @@ module SpectreFormWith
         input_class = ['form-input']
         input_class.push('is-error') if object && object.errors.has_key?(name)
 
-        super(name, insert_class(input_class.join(' '), options))
+        super(name, insert_class(options, input_class))
       end
     end
 
@@ -25,30 +25,30 @@ module SpectreFormWith
     end
 
     def check_box(name, options = {}, checked_value = '1', unchecked_value = '0')
-      input = super(name, insert_class('', options), checked_value, unchecked_value)
+      input = super(name, insert_class(options, ''), checked_value, unchecked_value)
       icon = @template.content_tag(:i, '', class: 'form-icon')
       input + icon
     end
 
     def select(name, choices = nil, options = {}, html_options = {}, &block)
-      super(name, choices, options, insert_class('form-select', html_options), &block)
+      super(name, choices, options, insert_class(html_options, 'form-select', 'is-error': object && object.errors.has_key?(name)), &block)
     end
 
     def collection_select(method, collection, value_method, text_method, options = {}, html_options = {})
-      super(method, collection, value_method, text_method, options, insert_class('form-select', html_options))
+      super(method, collection, value_method, text_method, options, insert_class(html_options, 'form-select', 'is-error': object && object.errors.has_key?(method)))
     end
     
     alias default_label label
     def label(name, text = nil, options = {}, &block)
-      default_label(name, text, insert_class('form-label', options), &block)
+      default_label(name, text, insert_class(options, 'form-label'), &block)
     end
     
     def check_label(name, options = {}, &block)
-      default_label(name, insert_class('form-checkbox', options), &block)
+      default_label(name, insert_class(options, 'form-checkbox'), &block)
     end
     
     def radio_label(name, options = {}, &block)
-      default_label(name, insert_class('form-switch', options), &block)
+      default_label(name, insert_class(options, 'form-switch'), &block)
     end
 
     def error_notification(message = nil)
@@ -77,9 +77,10 @@ module SpectreFormWith
 
     private
 
-    def insert_class(class_name, options)
+    def insert_class(options, *class_names, **conditional_class_names)
       output = options.dup
-      output[:class] = ((output[:class] || '') + ' ' + class_name).strip
+      
+      output[:class] = ((output[:class] || '') + ' ' + (class_names + conditional_class_names.map { |k, v| v ? k : nil }.compact).map(&:to_s).uniq.join(' ')
       output
     end
   end
